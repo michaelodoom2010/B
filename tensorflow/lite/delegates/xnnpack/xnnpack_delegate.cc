@@ -534,7 +534,7 @@ class Delegate {
     // If no weight cache is provided, add one when requested.
     if (!options_.weights_cache) {
       if (options_.experimental_weight_cache_file_path) {
-        if (weight_cache_provider_.Load(
+        if (weight_cache_provider_.LoadOrStartBuild(
                 options_.experimental_weight_cache_file_path)) {
           TFLITE_LOG(tflite::TFLITE_LOG_INFO,
                      "XNNPack weight cache loaded from '%s'.",
@@ -551,8 +551,12 @@ class Delegate {
             weight_cache_provider_.GetFilePath().data();
       } else {
         TFLITE_LOG(tflite::TFLITE_LOG_INFO,
-                   "XNNPack weight cache not enabled.");
+                   "XNNPack weight cache file path not provided.",
+                   options_.experimental_weight_cache_file_path);
+        options_.experimental_weight_cache_file_path = nullptr;
       }
+    } else {
+      TFLITE_LOG(tflite::TFLITE_LOG_INFO, "XNNPack weight cache not enabled.");
     }
   }
 
