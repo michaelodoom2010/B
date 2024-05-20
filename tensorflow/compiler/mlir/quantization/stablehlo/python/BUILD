@@ -37,6 +37,7 @@ pytype_strict_library(
         "//tensorflow/compiler/mlir/quantization/tensorflow/python:py_function_lib_py",
         "//tensorflow/compiler/mlir/quantization/tensorflow/python:save_model",
         "//tensorflow/core:protos_all_py",
+        "//tensorflow/python/util:tf_export",
     ],
 )
 
