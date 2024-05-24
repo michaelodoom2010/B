@@ -641,6 +641,8 @@ mlir::LogicalResult ApplyIndexingOp::fold(
       results.push_back(getOperand(dim.getPosition()));
     } else if (auto sym = mlir::dyn_cast<mlir::AffineSymbolExpr>(expr)) {
       results.push_back(getOperand(map.getNumDims() + sym.getPosition()));
+    } else if (auto cst = mlir::dyn_cast<mlir::AffineConstantExpr>(expr)) {
+      results.push_back(OpBuilder(getContext()).getIndexAttr(cst.getValue()));
     } else {
       results.clear();
       return failure();
