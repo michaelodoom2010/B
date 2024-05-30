@@ -73,9 +73,9 @@ TfLiteStatus SparsifyModel(const tflite::ModelT& input_model,
   // Export the results to the builder
   std::string result;
   tflite::FlatbufferExportOptions options;
-  options.toco_flags.set_force_select_tf_ops(false);
-  options.toco_flags.set_enable_select_tf_ops(true);
-  options.toco_flags.set_allow_custom_ops(true);
+  options.converter_flags.set_force_select_tf_ops(false);
+  options.converter_flags.set_enable_select_tf_ops(true);
+  options.converter_flags.set_allow_custom_ops(true);
 
   // Copy metadata for Reduced Precision Support from input model if it exists
   for (const auto& metadata : input_model.metadata) {
