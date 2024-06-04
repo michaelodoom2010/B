@@ -66,7 +66,7 @@ all HLOs from an execution dump, with e.g.:
   bazel run hlo_runner_main -- /dump/*before_optimizations*.txt
 
 Mock GPU usage:
-  bazel run hlo_runner_main -- --enable_mock_gpu=true /path/to/hlo_module.hlo
+  bazel run hlo_runner_main -- --enable_mock_nccl=true /path/to/hlo_module.hlo
 
 Tip: If the input generation takes too long or uses too much host memory,
 consider using --hlo_argument_mode=uninitialized.
@@ -84,7 +84,6 @@ absl::StatusOr<std::unique_ptr<xla::PjRtClient>> GetClient(
   CHECK_EQ(device_type_str, "gpu");
 
   if (enable_mock_nccl) {
-    CHECK_GT(num_nodes, 1);
     return xla::FunctionalHloRunner::CreateMockGpuClient(num_nodes);
   } else {
     if (num_nodes == 1) {
