@@ -81,7 +81,6 @@ cc_library(
     deps = [
         "//tensorflow/compiler/mlir/quantization/common:attrs_and_constraints",
         "//tensorflow/compiler/mlir/quantization/tensorflow/cc:constant_fold",
-        "//tensorflow/lite/kernels:padding",
         "@com_google_absl//absl/algorithm:container",
         "@com_google_absl//absl/strings:str_format",
         "@llvm-project//llvm:Support",
