@@ -598,6 +598,13 @@ absl::Status CheckGpuDelegateCompatibility(const OpSignature& op_sig) {
       return absl::OkStatus();
     }
 
+    case kTfLiteBuiltinDynamicUpdateSlice: {
+      if (op_sig.inputs.size() != 3) {
+        return absl::UnimplementedError(
+            "DynamicUpdateSlice requires 3 inputs.");
+      }
+      return absl::OkStatus();
+    }
     case kTfLiteBuiltinFullyConnected: {
       const TfLiteFullyConnectedParams* tf_options;
       RETURN_IF_ERROR(RetrieveBuiltinData(op_sig, &tf_options));
